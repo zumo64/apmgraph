@@ -1,0 +1,28 @@
+simpleGraph:
+  max_threads: 1
+  transaction_timeout: 15
+  run_for: 120
+  auto_loop: true
+  start_vertex: "Service 1"
+
+  services:
+    - Service 1:
+        average_service_time: .400
+        probability_of_failure: 0.0
+        is_final_service: false
+    - Service 2:
+        average_service_time: .400
+        probability_of_failure: 0.0
+        is_final_service: false
+    - Service 3:
+        average_service_time: .400
+        probability_of_failure: 0.0
+        is_final_service: false
+    - Service 4:
+        average_service_time: .400
+        probability_of_failure: 0.0
+        is_final_service: true
+  links:
+    - 'Service 1:Service 2:1'
+    - 'Service 2:Service 3:1'
+    - 'Service 3:Service 4:1'

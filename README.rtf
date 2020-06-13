@@ -1,0 +1,28 @@
+
+
+
+PUT _template/events
+{
+  "index_patterns": [
+    "events-*"
+  ],
+  "mappings": {
+    "properties": {
+      "event_timestamp": {
+        "type": "date"
+      },
+      "service_name": {
+        "type": "keyword"
+      },
+      "message": {
+        "type": "text",
+      }
+    }
+  }
+}
+}
+`
+
+
+$ ~/Elastic/distribs/logstash-7.6.2/bin/logstash -f ./apm.conf
+$ ~/Elastic/distribs/filebeat-7.6.2-darwin-x86_64/filebeat -c ./filebeat.yml

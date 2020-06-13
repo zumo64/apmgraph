@@ -1,0 +1,70 @@
+simpleGraph:
+  max_threads: 100
+  transaction_timeout: 5
+  run_for: 120
+  auto_loop: true
+  start_vertex: "Service_0"
+
+  services:
+    - Service_0:
+        average_service_time: .100
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_1:
+        average_service_time: .200
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_2:
+        average_service_time: .400
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_3:
+        average_service_time: .200
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_4:
+        average_service_time: 1
+        probability_of_failure: 0.
+        is_final_service: false
+    - Service_5:
+        average_service_time: .500
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_6:
+        average_service_time: .200
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_7:
+        average_service_time: .200
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_8:
+        average_service_time: .300
+        probability_of_failure: 0
+        is_final_service: false
+    - Service_9:
+        average_service_time: .800
+        probability_of_failure: 0
+        is_final_service: true
+  links:
+    - 'Service_0:Service_1:1'
+    - 'Service_0:Service_4:1'
+    - 'Service_0:Service_5:1'
+    - 'Service_1:Service_3:1'
+    - 'Service_1:Service_4:1'
+    - 'Service_1:Service_2:1'
+    - 'Service_2:Service_3:1'
+    - 'Service_2:Service_3:1'
+    - 'Service_3:Service_4:1'
+    - 'Service_3:Service_4:1'
+    - 'Service_4:Service_5:1'
+    - 'Service_4:Service_6:1'
+    - 'Service_5:Service_7:1'
+    - 'Service_5:Service_6:1'
+    - 'Service_6:Service_7:1'
+    - 'Service_6:Service_8:1'
+    - 'Service_7:Service_8:1'
+    - 'Service_7:Service_9:1'
+    - 'Service_8:Service_9:1'
+
+

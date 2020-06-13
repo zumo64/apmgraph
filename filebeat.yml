@@ -1,0 +1,39 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /Users/zumo/PycharmProjects/apmgraph/events.log
+
+# 2020-04-20T00:34:45.892208|INFO|Service_1|f8794934-828d-11ea-8217-acde48001122
+# %{event_timestamp}|%{log_level}|%{step}|%{entity_id}|%{message}|%{service_name}|%{flow_name}
+processors:
+  - copy_fields:
+      fields:
+        - from: message
+          to: raw_message
+      fail_on_error: false
+      ignore_missing: true
+
+  - drop_fields:
+      fields: ["message"]
+      ignore_missing: false
+
+  - dissect:
+      tokenizer: "%{event_timestamp}|%{log_level}|%{step}|%{entity_id}|%{message}|%{service_name}|%{flow_name}"
+      target_prefix: ""
+      field: "raw_message"
+
+  - drop_fields:
+      fields: ["raw_message"]
+      ignore_missing: false
+
+output.elasticsearch:
+  index: "events-%{+yyyy.MM.dd}"
+
+setup.template.enabled: true
+setup.template.name: events
+setup.template.pattern: events-*
+setup.ilm.enabled: false
+
+cloud.id: "graph-apm:ZXVyb3BlLXdlc3QzLmdjcC5jbG91ZC5lcy5pbyRkOWNlZWMxNGJjZjQ0ZjUyOGVkZmFlMjc0ZGZjMmMzYSQyMGYzZTMzNzIwNTg0YTcwYjIzNmQzMDgzYmM5ZDNmZQ=="
+cloud.auth: "elastic:kWCRXav9z3rozxr5VYV2dFSn"
